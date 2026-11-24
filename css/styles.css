@@ -22,9 +22,13 @@ h2 {
     font-size: 4.5rem;
 }
 
-p, a, li {
+p, a, li, label {
     font-family: "Sniglet", system-ui;
     font-size: 2rem;
+}
+
+label, input[type="text"] {
+    font-size: 1.5rem;
 }
 
 p{
@@ -33,6 +37,7 @@ p{
 
 a {
     text-decoration: none;
+    padding: 1.5rem;
 }
 
 li {
@@ -103,4 +108,33 @@ footer{
 footer a {
     font-size: 2rem;
     text-decoration: underline
+}
+
+/* Input */
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form div input {
+    background-color:#f0f5f9;
+    border-radius: .5rem;
+    border: .125rem solid #D1DCE5;
+    box-shadow: .125rem .125rem .125rem #D1DCE5;
+    padding: .5rem;
+}
+
+form div button{
+    padding: 1rem;
+    margin: 0rem 1rem;
+    font-size: 1.5rem;
+    background-color:#5489B1;
+    border-radius: .5rem;
+    border: none;
+}
+
+form div{
+    margin: 2rem 0rem !important;
 }
