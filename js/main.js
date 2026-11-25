@@ -3,6 +3,7 @@ let req = new XMLHttpRequest();
 req.onreadystatechange = () => {
   if (req.readyState == XMLHttpRequest.DONE) {
     currentPage = document.body.dataset.page;
+    console.log(currentPage);
     familyJson = JSON.parse(req.responseText)
 console.log(familyJson );
     pageContent = familyJson[currentPage];
