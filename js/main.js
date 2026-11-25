@@ -7,6 +7,7 @@ req.onreadystatechange = () => {
     familyJson = JSON.parse(req.responseText)
 console.log(familyJson );
     pageContent = familyJson[currentPage];
+    console.log(pageContent);
     list = document.getElementById("wish-list");
     if (pageContent) {
       for (const content of pageContent) {
