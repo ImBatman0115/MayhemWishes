@@ -9,13 +9,17 @@ console.log(familyJson );
     pageContent = familyJson[currentPage];
     console.log(pageContent);
     list = document.getElementById("wish-list");
-    if (pageContent) {
-      for (const content of pageContent) {
-        const item = document.createElement("li");
-        item.textContent = content;
-        list.appendChild(item);
-      }
-    }
+    pageContent.items.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      list.appendChild(li);
+    })
+      // for (const content of pageContent) {
+      //   const item = document.createElement("li");
+      //   item.textContent = content;
+      //   list.appendChild(item);
+      // }
+    
   }
 };
 
