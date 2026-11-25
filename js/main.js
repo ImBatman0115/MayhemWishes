@@ -7,13 +7,13 @@ req.onreadystatechange = () => {
     familyJson = JSON.parse(req.responseText)
 console.log(familyJson );
     const pageContent = familyJson[currentPage];
-    console.log(familyJson.GrandmaDorothy);
+    console.log(familyJson.FamilyMembers.GrandmaDorothy);
     list = document.getElementById("wish-list");
-    pageContent.forEach(item => {
-      const li = document.createElement('li');
-      li.textContent = item;
-      list.appendChild(li);
-    })
+    // pageContent.forEach(item => {
+    //   const li = document.createElement('li');
+    //   li.textContent = item;
+    //   list.appendChild(li);
+    // })
       // for (const content of pageContent) {
       //   const item = document.createElement("li");
       //   item.textContent = content;
