@@ -9,7 +9,7 @@ console.log(familyJson );
     const pageContent = familyJson[currentPage];
     console.log(pageContent);
     list = document.getElementById("wish-list");
-    pageContent.items.forEach(item => {
+    pageContent.forEach(item => {
       const li = document.createElement('li');
       li.textContent = item;
       list.appendChild(li);
