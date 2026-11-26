@@ -1,28 +1,45 @@
-let req = new XMLHttpRequest();
+ //grabs current page based of the data-page attribute on the body tag
+const currentPage = document.body.dataset.page;
+//getting elements
+const list = document.getElementById("wish-list");
+const form = document.getElementById('form');
+const input = document.getElementById('wish');
 
-req.onreadystatechange = () => {
-  if (req.readyState == XMLHttpRequest.DONE) {
-    //grabs current page based of the data-page attribute on the body tag
-    const currentPage = document.body.dataset.page;
-    //parsing the JSON
-    const familyJson = JSON.parse(req.responseText)
-    console.log(familyJson );
-    //getting the first level of the JSON
+let familyJson = null;
+
+function renderList() {
+  list.innerHTML = "";
+  //getting the first level of the JSON
     const members = familyJson.FamilyMembers;
     //if members and currentpage match display the list
     const pageContent = members ? members[currentPage] : undefined;
-    
-    // console.log("currentPage:", currentPage);
-    // console.log("avaiable keys:", Object.keys(familyJson));
-    // console.log("pageContent:", pageContent[currentPage]);
-    
-    //loop through array until all list items are displayed
-     list = document.getElementById("wish-list");
+
+  if (!Array.isArray(pageContent)) return;
+
+  //loop through array until all list items are displayed
+     
      pageContent.forEach(item => {
        const li = document.createElement('li');
        li.textContent = item;
       list.appendChild(li);
      })
+}
+
+let req = new XMLHttpRequest();
+
+req.onreadystatechange = () => {
+  if (req.readyState == XMLHttpRequest.DONE) {
+   
+    //parsing the JSON
+    const familyJson = JSON.parse(req.responseText)
+    console.log(familyJson );
+    renderList();
+    
+    // console.log("currentPage:", currentPage);
+    // console.log("avaiable keys:", Object.keys(familyJson));
+    // console.log("pageContent:", pageContent[currentPage]);
+    
+  
     
   }
 };
@@ -32,13 +49,13 @@ req.setRequestHeader("X-Master-Key", "$2a$10$JNdkBhvAYyuzv1ByZvLuyODWqm3ErmPO.oU
 req.send();
 
 
-const form = document.getElementById('form');
-const input = document.getElementById('wish');
+
 form.addEventListener('submit', (event) =>{
   event.preventDefault();
   const newItem = input.value.trim();
+  if (!newItem || !familyJson?.FamilyMembers) return;
 
-  if (!Array.isArray(familyData.FamilyMembers[currentPage])) {
+  if (!Array.isArray(familyJson.FamilyMembers[currentPage])) {
     familyData.FamilyMembers[currentPage] = [];
   }
 
@@ -49,7 +66,7 @@ form.addEventListener('submit', (event) =>{
 req.onreadystatechange = () => {
   if (req.readyState == XMLHttpRequest.DONE) {
    input.value = "";
-   
+   renderList();
   }
 };
 
