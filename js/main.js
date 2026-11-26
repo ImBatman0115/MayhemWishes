@@ -55,7 +55,7 @@ form.addEventListener('submit', (event) =>{
   event.preventDefault();
 
   const lastUpdate = new Date();
-  update.textContent = lastUpdate.toDateString();
+  update.textContent = 'Last Updated:', lastUpdate.toDateString();
 
 
   const newItem = input.value.trim();
