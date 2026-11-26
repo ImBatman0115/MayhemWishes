@@ -42,6 +42,7 @@ a {
 
 .home-li {
     list-style: none;
+    list-style-position: inside;
 }
 
 img {
