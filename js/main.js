@@ -8,6 +8,7 @@ const update = document.getElementById('last-updated');
 
 let familyJson = null;
 
+
 function renderList() {
   list.innerHTML = "";
   //getting the first level of the JSON
@@ -53,10 +54,6 @@ req.send();
 
 form.addEventListener('submit', (event) =>{
   event.preventDefault();
-
-  const lastUpdate = new Date();
-  update.textContent = 'Last Updated:', lastUpdate.toDateString();
-
 
   const newItem = input.value.trim();
   if (!newItem || !familyJson?.FamilyMembers) return;
