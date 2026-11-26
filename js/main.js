@@ -2,25 +2,20 @@ let req = new XMLHttpRequest();
 
 req.onreadystatechange = () => {
   if (req.readyState == XMLHttpRequest.DONE) {
-    currentPage = document.body.dataset.page;
-    console.log(currentPage);
-    familyJson = JSON.parse(req.responseText)
-console.log(familyJson );
-console.log(familyJson.FamilyMembers.currentPage);
-    const pageContent = familyJson[FamilyMembers.currentPage];
-    //console.log(pageContent);
+    const currentPage = document.body.dataset.page;
+    const familyJson = JSON.parse(req.responseText)
+    console.log(familyJson );
+    const pageContent = familyJson.record ?? familyJson;
+    console.log("currentPage:", currentPage);
+    console.log("avaiable keys:", Object.keys(familyJson));
+    console.log("pageContent:", pageContent[currentPage]);
     
-    list = document.getElementById("wish-list");
-    pageContent.forEach(item => {
-      const li = document.createElement('li');
-      li.textContent = item;
+     list = document.getElementById("wish-list");
+     pageContent.forEach(item => {
+       const li = document.createElement('li');
+       li.textContent = item;
       list.appendChild(li);
-    })
-      // for (const content of pageContent) {
-      //   const item = document.createElement("li");
-      //   item.textContent = content;
-      //   list.appendChild(item);
-      // }
+     })
     
   }
 };
