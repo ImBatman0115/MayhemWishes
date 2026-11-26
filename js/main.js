@@ -1,23 +1,33 @@
-let req = new XMLHttpRequest();
-
-req.onreadystatechange = () => {
-  if (req.readyState == XMLHttpRequest.DONE) {
-    const currentPage = document.body.dataset.page;
-    const familyJson = JSON.parse(req.responseText)
-    console.log(familyJson );
-    const members = familyJson.FamilyMembers;
-    const pageContent = members ? members[currentPage] : undefined;
+list = document.getElementById("wish-list");
+function renderWishList(){
+  list.innerHTML = "";
+  const pageContent = members ? members[currentPage] : undefined;
     
-    console.log("currentPage:", currentPage);
-    console.log("avaiable keys:", Object.keys(familyJson));
-    console.log("pageContent:", pageContent[currentPage]);
+    // console.log("currentPage:", currentPage);
+    // console.log("avaiable keys:", Object.keys(familyJson));
+    // console.log("pageContent:", pageContent[currentPage]);
     
-     list = document.getElementById("wish-list");
+    //loop through array until all list items are displayed
      pageContent.forEach(item => {
        const li = document.createElement('li');
        li.textContent = item;
       list.appendChild(li);
      })
+};
+
+let req = new XMLHttpRequest();
+
+req.onreadystatechange = () => {
+  if (req.readyState == XMLHttpRequest.DONE) {
+    //grabs current page based of the data-page attribute on the body tag
+    const currentPage = document.body.dataset.page;
+    //parsing the JSON
+    const familyJson = JSON.parse(req.responseText)
+    console.log(familyJson );
+    //getting the first level of the JSON
+    const members = familyJson.FamilyMembers;
+    //if members and currentpage match display the list
+    renderWishList();
     
   }
 };
@@ -26,15 +36,30 @@ req.open("GET", "https://api.jsonbin.io/v3/b/6b061107ac6210605aa1e795/latest?met
 req.setRequestHeader("X-Master-Key", "$2a$10$JNdkBhvAYyuzv1ByZvLuyODWqm3ErmPO.oUJhCG4EMMHwzrYZeP3K");
 req.send();
 
-// let req = new XMLHttpRequest();
 
-// req.onreadystatechange = () => {
-//   if (req.readyState == XMLHttpRequest.DONE) {
-//     console.log(req.responseText);
-//   }
-// };
+const form = document.getElementById('form');
+const input = document.getElementById('wish');
+form.addEventListener('submit', (event) =>{
+  event.preventDefault();
+  const newItem = input.value.trim();
 
-// req.open("PUT", "https://api.jsonbin.io/v3/b/6b061107ac6210605aa1e795", true);
-// req.setRequestHeader("Content-Type", "application/json");
-// req.setRequestHeader("X-Master-Key", "$2a$10$JNdkBhvAYyuzv1ByZvLuyODWqm3ErmPO.oUJhCG4EMMHwzrYZeP3K");
-// req.send('{"FamilyMembers": {"GrandmaDorothy": ["Blanket"],"Granny": [],"Grandad": [],"Jonny": [],"Perry": [],"Brad": [],"Jess": [],"Amy": [],"Stephy": [],"Kayden": [],"Logan": [],"Zander": [],"Peyton": [],"Declan": [],"Greyson": []}}');
+  if (!Array.isArray(familyData.FamilyMembers[currentPage])) {
+    familyData.FamilyMembers[currentPage] = [];
+  }
+
+  familyData.FamilyMembers[currentPage].push(newItem);
+
+  let req = new XMLHttpRequest();
+
+req.onreadystatechange = () => {
+  if (req.readyState == XMLHttpRequest.DONE) {
+   input.value = "";
+  renderWishList();
+  }
+};
+
+req.open("PUT", "https://api.jsonbin.io/v3/b/6b061107ac6210605aa1e795", true);
+req.setRequestHeader("Content-Type", "application/json");
+req.setRequestHeader("X-Master-Key", "$2a$10$JNdkBhvAYyuzv1ByZvLuyODWqm3ErmPO.oUJhCG4EMMHwzrYZeP3K");
+req.send(JSON.stringify(familyJson));
+})
