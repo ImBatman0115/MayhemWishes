@@ -5,7 +5,9 @@ req.onreadystatechange = () => {
     const currentPage = document.body.dataset.page;
     const familyJson = JSON.parse(req.responseText)
     console.log(familyJson );
-    const pageContent = familyJson.record ?? familyJson;
+    const members = familyJson.FamilyMembers;
+    const pageContent = members ? members[currentPage] : undefined;
+    
     console.log("currentPage:", currentPage);
     console.log("avaiable keys:", Object.keys(familyJson));
     console.log("pageContent:", pageContent[currentPage]);
