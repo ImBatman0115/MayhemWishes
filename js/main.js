@@ -7,8 +7,8 @@ req.onreadystatechange = () => {
     familyJson = JSON.parse(req.responseText)
 console.log(familyJson );
     const pageContent = familyJson[FamilyMembers.currentPage];
-    console.log(pageContent);
-    //console.log(familyJson.FamilyMembers.GrandmaDorothy);
+    //console.log(pageContent);
+    console.log(familyJson.FamilyMembers.currentPage);
     list = document.getElementById("wish-list");
     pageContent.forEach(item => {
       const li = document.createElement('li');
