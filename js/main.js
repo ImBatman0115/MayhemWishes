@@ -56,10 +56,10 @@ form.addEventListener('submit', (event) =>{
   if (!newItem || !familyJson?.FamilyMembers) return;
 
   if (!Array.isArray(familyJson.FamilyMembers[currentPage])) {
-    familyData.FamilyMembers[currentPage] = [];
+    familyJson.FamilyMembers[currentPage] = [];
   }
 
-  familyData.FamilyMembers[currentPage].push(newItem);
+  familyJson.FamilyMembers[currentPage].push(newItem);
 
   let req = new XMLHttpRequest();
 
