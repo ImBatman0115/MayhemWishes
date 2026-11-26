@@ -1,6 +1,7 @@
 list = document.getElementById("wish-list");
 function renderWishList(){
   list.innerHTML = "";
+  const members = familyJson.FamilyMembers;
   const pageContent = members ? members[currentPage] : undefined;
     
     // console.log("currentPage:", currentPage);
@@ -25,7 +26,7 @@ req.onreadystatechange = () => {
     const familyJson = JSON.parse(req.responseText)
     console.log(familyJson );
     //getting the first level of the JSON
-    const members = familyJson.FamilyMembers;
+    
     //if members and currentpage match display the list
     renderWishList();
     
