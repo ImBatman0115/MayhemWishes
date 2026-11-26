@@ -1,21 +1,3 @@
-list = document.getElementById("wish-list");
-function renderWishList(){
-  list.innerHTML = "";
-  const members = familyJson.FamilyMembers;
-  const pageContent = members ? members[currentPage] : undefined;
-    
-    // console.log("currentPage:", currentPage);
-    // console.log("avaiable keys:", Object.keys(familyJson));
-    // console.log("pageContent:", pageContent[currentPage]);
-    
-    //loop through array until all list items are displayed
-     pageContent.forEach(item => {
-       const li = document.createElement('li');
-       li.textContent = item;
-      list.appendChild(li);
-     })
-};
-
 let req = new XMLHttpRequest();
 
 req.onreadystatechange = () => {
@@ -26,9 +8,21 @@ req.onreadystatechange = () => {
     const familyJson = JSON.parse(req.responseText)
     console.log(familyJson );
     //getting the first level of the JSON
-    
+    const members = familyJson.FamilyMembers;
     //if members and currentpage match display the list
-    renderWishList();
+    const pageContent = members ? members[currentPage] : undefined;
+    
+    // console.log("currentPage:", currentPage);
+    // console.log("avaiable keys:", Object.keys(familyJson));
+    // console.log("pageContent:", pageContent[currentPage]);
+    
+    //loop through array until all list items are displayed
+     list = document.getElementById("wish-list");
+     pageContent.forEach(item => {
+       const li = document.createElement('li');
+       li.textContent = item;
+      list.appendChild(li);
+     })
     
   }
 };
@@ -55,7 +49,7 @@ form.addEventListener('submit', (event) =>{
 req.onreadystatechange = () => {
   if (req.readyState == XMLHttpRequest.DONE) {
    input.value = "";
-  renderWishList();
+   
   }
 };
 
