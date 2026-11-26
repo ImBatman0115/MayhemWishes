@@ -31,7 +31,7 @@ req.onreadystatechange = () => {
   if (req.readyState == XMLHttpRequest.DONE) {
    
     //parsing the JSON
-    const familyJson = JSON.parse(req.responseText)
+    familyJson = JSON.parse(req.responseText)
     console.log(familyJson );
     renderList();
     
