@@ -139,6 +139,11 @@ form div button{
     border: none;
 }
 
+form div button:hover {
+    background-color: #93B3CB;
+    cursor: pointer;
+}
+
 form div{
     margin: 2rem 0rem !important;
 }
