@@ -4,6 +4,7 @@ const currentPage = document.body.dataset.page;
 const list = document.getElementById("wish-list");
 const form = document.getElementById('form');
 const input = document.getElementById('wish');
+const update = document.getElementById('last-updated');
 
 let familyJson = null;
 
@@ -52,6 +53,11 @@ req.send();
 
 form.addEventListener('submit', (event) =>{
   event.preventDefault();
+
+  const lastUpdate = new Date();
+  update.textContent = lastUpdate.toDateString();
+
+
   const newItem = input.value.trim();
   if (!newItem || !familyJson?.FamilyMembers) return;
 
