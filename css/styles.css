@@ -148,6 +148,11 @@ form div{
     margin: 2rem 0rem !important;
 }
 
+.caution-banner{
+    background-color: yellow;
+    margin: 3rem;
+}
+
 @media (min-width: 620px) {
     h1 {
     font-size: 6rem;
