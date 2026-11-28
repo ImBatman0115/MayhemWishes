@@ -8,6 +8,24 @@ const update = document.getElementById('last-updated');
 
 let familyJson = null;
 
+function saveFamilyData() {
+  const putReq = new XMLHttpRequest();
+
+  putReq.onreadystatechange = () => {
+    if (putReq.readyState === XMLHttpRequest.DONE) {
+      if (putReq.status >= 200 && putReq.status < 300) {
+        renderList();
+      } else {
+        console.error("Failed to update wish list:", putReq.status, putReq.statusText);
+      }
+    }
+  };
+
+  putReq.open("PUT", "https://api.jsonbin.io/v3/b/6b089db43957a11c13b51d2b/latest?meta=false", true);
+  putReq.setRequestHeader("Content-Type", "application/json");
+  putReq.setRequestHeader("X-Master-Key", '$2a$10$JNdkBhvAYyuzv1ByZvLuyODWqm3ErmPO.oUJhCG4EMMHwzrYZeP3K');
+  putReq.send(JSON.stringify(familyJson));
+}
 
 function renderList() {
   list.innerHTML = "";
@@ -22,7 +40,17 @@ function renderList() {
      
      pageContent.forEach(item => {
        const li = document.createElement('li');
+       const deleteBtn = document.createElement('button');
+       deleteBtn.type = 'button';
+       deleteBtn.textContent = 'Delete';
        li.textContent = item;
+
+       deleteBtn.addEventListener("click", () => {
+        pageContent.splice(index, 1);
+        saveFamilyData();
+       })
+       
+       li.appendChild(deleteBtn);
       list.appendChild(li);
      })
 }
@@ -63,18 +91,6 @@ form.addEventListener('submit', (event) =>{
   }
 
   familyJson.FamilyMembers[currentPage].push(newItem);
-
-  let req = new XMLHttpRequest();
-
-req.onreadystatechange = () => {
-  if (req.readyState == XMLHttpRequest.DONE) {
-   input.value = "";
-   renderList();
-  }
-};
-
-req.open("PUT", "https://api.jsonbin.io/v3/b/6b089db43957a11c13b51d2b", true);
-req.setRequestHeader("Content-Type", "application/json");
-req.setRequestHeader("X-Master-Key", "$2a$10$JNdkBhvAYyuzv1ByZvLuyODWqm3ErmPO.oUJhCG4EMMHwzrYZeP3K");
-req.send(JSON.stringify(familyJson));
+input.value = "";
+saveFamilyData();
 })
