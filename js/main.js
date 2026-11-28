@@ -38,7 +38,7 @@ function renderList() {
 
   //loop through array until all list items are displayed
      
-     pageContent.forEach(item => {
+     pageContent.forEach((item, index) => {
        const li = document.createElement('li');
        const deleteBtn = document.createElement('button');
        deleteBtn.type = 'button';
