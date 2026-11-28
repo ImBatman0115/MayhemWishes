@@ -68,7 +68,7 @@ body {
 
 /* Header */
 
-header div:nth-child(1) {
+.header-banner {
     background-color: #5489B1;
     padding: 1rem;
 
@@ -79,7 +79,7 @@ header div:nth-child(1) {
 }
 
 header div:nth-child(2) {
-    margin: 7rem 0rem;
+    margin-bottom: 7rem;
 }
 
 
@@ -150,7 +150,8 @@ form div{
 
 .caution-banner{
     background-color: yellow;
-    margin: 3rem;
+    padding: 2rem;
+    margin: 0rem !important;
 }
 
 @media (min-width: 620px) {
